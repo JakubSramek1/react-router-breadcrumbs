@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../components/Breadcrumbs";
+import { usersData } from "../data";
 
 type UsersProps = {};
 
 const Users = ({}: UsersProps) => {
   return (
     <>
+      <Breadcrumbs />
       <h1>Users</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Link to="/users/1">Frodo Baggins</Link>
-        <Link to="/users/2">Samwise Gamgee</Link>
-        <Link to="/users/3">Gandalf</Link>
+        {usersData.map(({ name, id }) => (
+          <Link to={`/users/${id}`}>{name}</Link>
+        ))}
       </div>
     </>
   );
