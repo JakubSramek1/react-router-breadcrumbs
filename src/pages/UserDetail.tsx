@@ -3,9 +3,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import { usersData } from "../data";
 import { useEffect } from "react";
 
-type UserDetailProps = {};
-
-const UserDetail = ({}: UserDetailProps) => {
+const UserDetail = () => {
   const { id } = useParams();
   const user = usersData.find((user) => user.id === parseInt(id as string, 10));
   const location = useLocation();
@@ -17,7 +15,7 @@ const UserDetail = ({}: UserDetailProps) => {
       // Navigate to the same pathname with a new state
       navigate(location.pathname, { state: { userName: user?.name } });
     }
-  }, [user?.name]);
+  }, []);
 
   if (!user) {
     return null;

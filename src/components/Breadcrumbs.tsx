@@ -6,7 +6,7 @@ interface HandleType {
 
 const Breadcrumbs = () => {
   const matches = useMatches() as UIMatch<null, HandleType>[];
-  const crumbs = matches.map((mtch) => mtch.handle?.crumb).filter(Boolean);
+  const crumbs = matches.map(({ handle }) => handle?.crumb).filter(Boolean);
   const location = useLocation();
 
   return (
@@ -22,7 +22,15 @@ const Breadcrumbs = () => {
         const isLast = index + 1 === crumbs.length;
         return (
           <li key={index}>
-            <span style={{ textDecoration: "underline" }}>
+            <span
+              style={
+                isLast
+                  ? { pointerEvents: "none" }
+                  : {
+                      textDecoration: "underline",
+                    }
+              }
+            >
               {crumb(location.state?.userName)}
             </span>
             {!isLast && (
